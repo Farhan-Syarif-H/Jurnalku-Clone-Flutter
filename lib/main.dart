@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_clone/dashboard_page.dart';
 import 'package:jurnalku_clone/explore_page.dart';
 
 void main() {
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const ExplorePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
