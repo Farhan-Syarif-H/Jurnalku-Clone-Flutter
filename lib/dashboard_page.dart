@@ -44,16 +44,21 @@ class DashboardPage extends StatelessWidget {
 
                   SizedBox(width: 10),
 
-                  // CircleAvatar(
-                  //   radius: 18,
-                  //   backgroundImage: AssetImage("assets/profile.jpg"),
-                  // )
+                  ClipOval(
+                    child:
+                    Image.asset( 'assets/images/profile-blank.jpg',
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.cover,
+                    ),
+                  )
                 ],
               ),
             ],
           ),
         ),
       ),
+      
       body: Column(
         children: [
           Container(
@@ -91,12 +96,13 @@ class DashboardPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 50),
             child: Container(
               width: double.infinity,
+              height: 280,
               padding: EdgeInsets.all(50),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
                     Color(0xFF3A7BFF),
-                    Color(0xFF1555D0),
+                    Color.fromARGB(255, 16, 69, 167),
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
