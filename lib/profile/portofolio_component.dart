@@ -20,9 +20,6 @@ class PortofolioComponent extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ===============================
-                    // THUMBNAIL GAMBAR PROJECT
-                    // ===============================
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
@@ -38,10 +35,6 @@ class PortofolioComponent extends StatelessWidget {
                     ),
 
                     const SizedBox(height: 12),
-
-                    // ===============================
-                    // NAMA PROJECT
-                    // ===============================
                     const Text(
                       "Masjid App (Al - Ikram)",
                       style: TextStyle(
@@ -57,17 +50,14 @@ class PortofolioComponent extends StatelessWidget {
 
                     const SizedBox(height: 15),
 
-                    // ===============================
-                    // BUTTON A: DETAIL + ICON
-                    // BUTTON B: LIVE DEMO + ICON
-                    // ===============================
                     Row(
                       children: [
-                        // BUTTON 1 — Lihat detail
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 10),
+                              vertical: 12,
+                              horizontal: 10,
+                            ),
                             decoration: BoxDecoration(
                               color: Color(0xFF02398C),
                               borderRadius: BorderRadius.circular(8),
@@ -76,8 +66,11 @@ class PortofolioComponent extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Icon(Icons.arrow_right_alt,
-                                    color: Colors.white, size: 20),
+                                Icon(
+                                  Icons.arrow_right_alt,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                                 SizedBox(width: 6),
                                 Text(
                                   "Lihat detail",
@@ -93,11 +86,12 @@ class PortofolioComponent extends StatelessWidget {
 
                         const SizedBox(width: 10),
 
-                        // BUTTON 2 — Live Demo
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 10),
+                              vertical: 12,
+                              horizontal: 10,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.grey[800],
                               borderRadius: BorderRadius.circular(8),
@@ -106,8 +100,11 @@ class PortofolioComponent extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Icon(Icons.play_arrow,
-                                    color: Colors.white, size: 20),
+                                Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                                 SizedBox(width: 6),
                                 Text(
                                   "Live demo",
