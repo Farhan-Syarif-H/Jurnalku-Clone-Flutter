@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jurnalku_clone/dashboard_page.dart';
+// import 'package:jurnalku_clone/dashboard_page.dart';
 import 'package:jurnalku_clone/explore_page.dart';
 
 void main() {
@@ -11,12 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Jurnalku Clone',
       debugShowCheckedModeBanner: false,
+      title: 'Jurnalku Clone',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const DashboardPage(),
+      home: const ExplorePage(),
     );
   }
 }

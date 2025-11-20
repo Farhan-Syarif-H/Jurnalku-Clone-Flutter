@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_clone/dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -121,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image.asset(
-              'assets/images/hero-section.jpg',
+              'assets/images/Banner-Web.jpg',
               height: 150,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -253,7 +254,14 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DashboardPage(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         "Masuk",
                         style: TextStyle(
