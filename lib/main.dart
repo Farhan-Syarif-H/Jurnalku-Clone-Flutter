@@ -3,6 +3,7 @@ import 'package:jurnalku_clone/explore_page.dart';
 
 
 
+
 void main() {
   runApp(const MyApp());
 }
