@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_clone/login_page.dart';
+import 'package:jurnalku_clone/panduan_pengguna.dart';
 import 'package:jurnalku_clone/pengaturan_akun_page.dart';
 
 void main() {
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const PengaturanAkunPage(),
+      home: const LoginPage(),
     );
   }
 }

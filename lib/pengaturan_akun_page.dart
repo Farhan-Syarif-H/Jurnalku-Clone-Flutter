@@ -32,6 +32,7 @@ class _PengaturanAkunPageState extends State<PengaturanAkunPage> {
               ),
             ],
           ),
+          
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -43,7 +44,7 @@ class _PengaturanAkunPageState extends State<PengaturanAkunPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         "M. Arizqy Khylmi Alkazhia",
                         style: TextStyle(
@@ -77,7 +78,7 @@ class _PengaturanAkunPageState extends State<PengaturanAkunPage> {
 
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
