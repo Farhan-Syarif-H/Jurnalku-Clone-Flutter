@@ -30,40 +30,39 @@ class CatatanSikapPage extends StatelessWidget {
 
   final List<Map<String, dynamic>> tableData = [
     {
-      "no": 1,
       "kategori": "Baik",
       "catatan": "Membantu teman yang kesulitan",
       "status": "Selesai",
-      "lapor": "12 Jan 2025",
-      "update": "15 Jan 2025",
+      "dilaporkan": "12 Jan 2025",
+      "update terakhir": "15 Jan 2025",
     },
     {
-      "no": 2,
       "kategori": "Peringatan",
       "catatan": "Terlambat masuk kelas",
       "status": "Diproses",
-      "lapor": "20 Jan 2025",
-      "update": "21 Jan 2025",
+      "dilaporkan": "20 Jan 2025",
+      "update terakhir": "21 Jan 2025",
     },
     {
-      "no": 3,
       "kategori": "Baik",
       "catatan": "Membersihkan kelas",
       "status": "Selesai",
-      "lapor": "02 Feb 2025",
-      "update": "04 Feb 2025",
+      "dilaporkan": "02 Feb 2025",
+      "update terakhir": "04 Feb 2025",
     },
   ];
 
   @override
   Widget build(BuildContext context) {
+    final List<String> columns = tableData.first.keys.toList();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
               bottom: BorderSide(color: Color(0xFFE2E8F0), width: 2),
@@ -83,11 +82,14 @@ class CatatanSikapPage extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
-                  minimumSize: Size(40, 40),
+                  minimumSize: const Size(40, 40),
                 ),
-                child: Icon(Icons.home, size: 25, color: Color(0xFF64748B)),
+                child: const Icon(
+                  Icons.home,
+                  size: 25,
+                  color: Color(0xFF64748B),
+                ),
               ),
-
               Row(
                 children: [
                   Column(
@@ -102,14 +104,14 @@ class CatatanSikapPage extends StatelessWidget {
                           color: Colors.grey[800],
                         ),
                       ),
-                      Text(
+                      const Text(
                         "PPLG XII-3",
                         style: TextStyle(fontSize: 15, color: Colors.grey),
                       ),
                     ],
                   ),
-                  SizedBox(width: 10),
-                  CircleAvatar(
+                  const SizedBox(width: 10),
+                  const CircleAvatar(
                     radius: 18,
                     backgroundImage: AssetImage(
                       "assets/images/profile-blank.jpg",
@@ -126,165 +128,209 @@ class CatatanSikapPage extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: ListView(
           children: [
-            Text(
+            const Text(
               "Catatan Sikap Saya",
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-            Text(
-              "Lihat catatan sikap dan prilaku yang telah dilaporkan",
+            const Text(
+              "Lihat catatan sikap dan perilaku yang telah dilaporkan",
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 45),
+            const SizedBox(height: 45),
 
-            Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFFFFBEB),
-                borderRadius: BorderRadius.circular(8),
+            _warningBox(),
+
+            const SizedBox(height: 20),
+
+            _summaryCards(),
+
+            const SizedBox(height: 20),
+
+            Column(
+              children: columns.map((col) {
+                List<String> columnValues = tableData
+                    .map((row) => row[col].toString())
+                    .toList();
+
+                return _ColumnCard(title: col, data: columnValues);
+              }).toList(),
+            ),
+
+            const SizedBox(height: 40),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _warningBox() {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFBEB),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      height: 120,
+      width: double.infinity,
+      padding: const EdgeInsets.all(15),
+      child: const Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.alarm, color: Color(0xFFD97706), size: 25),
+          SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Perhatian",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF92400E),
+                  ),
+                ),
+                SizedBox(height: 4),
+                Flexible(
+                  child: Text(
+                    "Jika Anda merasa ada catatan yang tidak sesuai atau keliru, silakan hubungi guru jurusan untuk mengajukan klarifikasi.",
+                    style: TextStyle(fontSize: 15, color: Color(0xFFB45309)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _summaryCards() {
+    return Column(
+      children: List.generate(catatanData.length, (index) {
+        final item = catatanData[index];
+
+        return Container(
+          margin: const EdgeInsets.only(bottom: 25),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 4,
+                offset: Offset(0, 2),
               ),
-              height: 120,
-              width: double.infinity,
-              padding: EdgeInsets.all(15),
-              child: Row(
+            ],
+          ),
+          padding: const EdgeInsets.all(15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.alarm, color: Color(0xFFD97706), size: 25),
-                  SizedBox(width: 10),
-
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Perhatian",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF92400E),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-
-                        Flexible(
-                          child: Text(
-                            "Jika Anda merasa ada catatan yang tidak sesuai atau keliru, silakan hubungi guru jurusan untuk mengajukan klarifikasi.",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color(0xFFB45309),
-                            ),
-                          ),
-                        ),
-                      ],
+                  Text(
+                    item["title"],
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF4B5563),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "${item["quantity"]}",
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
                 ],
               ),
-            ),
-
-            SizedBox(height: 20),
-
-            Column(
-              children: List.generate(catatanData.length, (index) {
-                final item = catatanData[index];
-
-                return Container(
-                  margin: EdgeInsets.only(bottom: 25),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  padding: EdgeInsets.all(15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item["title"],
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF4B5563),
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            "${item["quantity"]}",
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: item["bgColor"],
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Icon(
-                          item["icon"],
-                          color: item["iconColor"],
-                          size: 28,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-            ),
-
-            SizedBox(height: 20),
-
-            Center(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columnSpacing: 30,
-                  headingRowColor: MaterialStateProperty.all(Color(0xFFF3F4F6)),
-                  border: TableBorder.all(color: Colors.grey.shade300),
-
-                  columns: const [
-                    DataColumn(label: Text("NO")),
-                    DataColumn(label: Text("KATEGORI")),
-                    DataColumn(label: Text("CATATAN")),
-                    DataColumn(label: Text("STATUS")),
-                    DataColumn(label: Text("DILAPORKAN")),
-                    DataColumn(label: Text("UPDATE TERAKHIR")),
-                    DataColumn(label: Text("AKSI")),
-                  ],
-
-                  rows: tableData.map((item) {
-                    return DataRow(
-                      cells: [
-                        DataCell(Text("${item["no"]}")),
-                        DataCell(Text(item["kategori"])),
-                        DataCell(Text(item["catatan"])),
-                        DataCell(Text(item["status"])),
-                        DataCell(Text(item["lapor"])),
-                        DataCell(Text(item["update"])),
-                        DataCell(Icon(Icons.visibility, color: Colors.blue)),
-                      ],
-                    );
-                  }).toList(),
+              Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: item["bgColor"],
+                  borderRadius: BorderRadius.circular(100),
                 ),
+                child: Icon(item["icon"], color: item["iconColor"], size: 28),
               ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class _ColumnCard extends StatefulWidget {
+  final String title;
+  final List<String> data;
+
+  const _ColumnCard({required this.title, required this.data});
+
+  @override
+  State<_ColumnCard> createState() => _ColumnCardState();
+}
+
+class _ColumnCardState extends State<_ColumnCard> {
+  bool expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Color(0xFFFFFFFF),
+      margin: const EdgeInsets.only(bottom: 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.title.toUpperCase(),
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    expanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                  ),
+                  onPressed: () {
+                    setState(() => expanded = !expanded);
+                  },
+                ),
+              ],
             ),
 
-            SizedBox(height: 40),
+            if (expanded) const Divider(),
+
+            if (expanded)
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: widget.data.length,
+                itemBuilder: (context, i) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Text(
+                      "${i + 1}. ${widget.data[i]}",
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                  );
+                },
+              ),
           ],
         ),
       ),
