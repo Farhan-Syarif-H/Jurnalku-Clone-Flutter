@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_clone/explore_page.dart';
 
+import 'package:jurnalku_clone/progress/progress_belajar.dart';
+
 
 
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const ExplorePage(),
+      home:  const ExplorePage(),
     );
   }
 }
