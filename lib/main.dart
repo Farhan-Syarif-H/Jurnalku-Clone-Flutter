@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_clone/dashboard_page.dart';
+import 'package:jurnalku_clone/explore_page.dart';
 
 void main() {
   runApp(const MyApp());
