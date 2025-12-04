@@ -1,13 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_clone/detail_pengguna/panduan_catatan_sikap_page.dart';
+import 'package:jurnalku_clone/detail_pengguna/panduan_ganti_password_page.dart';
+import 'package:jurnalku_clone/detail_pengguna/panduan_kelengkapan_profile_page.dart';
+import 'package:jurnalku_clone/detail_pengguna/panduan_mengisi_jurnal_page.dart';
+import 'package:jurnalku_clone/detail_pengguna/panduan_portfolio_page.dart';
+import 'package:jurnalku_clone/detail_pengguna/panduan_sertifikat_page.dart';
+import 'package:jurnalku_clone/detail_pengguna/panduan_unggah_profile_page.dart';
 
 class PanduanPenggunaPage extends StatelessWidget {
   const PanduanPenggunaPage({super.key});
+
+  Widget buildCard({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      hoverColor: Colors.transparent,
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 12),
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: Colors.blue[900], size: 30),
+            ),
+            SizedBox(width: 15),
+
+            /// FIX OVERFLOW DI SINI → Expanded
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(height: 3),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // ================= APP BAR ====================
+
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: Container(
@@ -27,7 +100,6 @@ class PanduanPenggunaPage extends StatelessWidget {
             children: [
               Icon(Icons.home, color: Colors.black),
 
-              // ================= NAMA USER ====================
               Row(
                 children: [
                   Column(
@@ -86,16 +158,16 @@ class PanduanPenggunaPage extends StatelessWidget {
               ),
               SizedBox(height: 25),
               Text(
-                "Selamat datang di panduan penggunaan aplikasi Jurnalku. Panduan ini akan membantu Anda memahami cara menggunakan fitur-fitur yang tersedia dengan optimal.", style: TextStyle(
+                "Selamat datang di panduan penggunaan aplikasi Jurnalku. Panduan ini akan membantu Anda memahami cara menggunakan fitur-fitur yang tersedia dengan optimal.",
+                style: TextStyle(
                   fontSize: 18,
                   color: Colors.grey[600],
                   fontWeight: FontWeight.w500,
                 ),
               ),
-
               SizedBox(height: 20),
 
-              // ================== BAGIAN: UMUM ==================
+              // ================================= UMUM =================================
               Text(
                 "Umum",
                 style: TextStyle(
@@ -103,112 +175,37 @@ class PanduanPenggunaPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               SizedBox(height: 12),
 
-              // === CARD 1 ===
-              Container(
-                margin: EdgeInsets.only(bottom: 12),
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+              buildCard(
+                icon: Icons.upload_file,
+                title: "Unggah Profile",
+                subtitle: "Panduan untuk mengunggah profile pengguna",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PanduanUnggahProfilePage(),
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(Icons.upload_file, color: Colors.blue[900], size: 30),
-                    ),
-                    SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Unggah Profile",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Panduan untuk mengunggah profile pengguna",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
 
-              // === CARD 2 ===
-              Container(
-                margin: EdgeInsets.only(bottom: 20),
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+              buildCard(
+                icon: Icons.lock,
+                title: "Ganti Password",
+                subtitle: "Panduan untuk mengganti password pengguna",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PanduanGantiPasswordPage(),
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        shape: BoxShape.circle,
-                      ),
-                    child: Icon(Icons.lock, color: Colors.blue[900], size: 30),
-                    ),
-                    SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Ganti Password",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Panduan untuk mengganti password pengguna",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
 
-              // ================== BAGIAN: UNTUK SISWA ==================
+              // ============================= UNTUK SISWA ==============================
               Text(
                 "Untuk Siswa",
                 style: TextStyle(
@@ -216,262 +213,79 @@ class PanduanPenggunaPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               SizedBox(height: 12),
 
-              // === CARD 3 ===
-              Container(
-                margin: EdgeInsets.only(bottom: 12),
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+              buildCard(
+                icon: Icons.book_online,
+                title: "Mengisi Jurnal",
+                subtitle: "Panduan untuk mengisi kegiatan sehari - hari",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PanduanMengisiJurnalPage(),
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        shape: BoxShape.circle,
-                      ),
-                    child: Icon(Icons.book_online, color: Colors.blue[900], size: 30),
-                    ),
-                    SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Mengisi Jurnal",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Panduan untuk mengisi kegiatan sehari - hari",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
 
-              // === CARD 4 ===
-              Container(
-                margin: EdgeInsets.only(bottom: 12),
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+              buildCard(
+                icon: Icons.person,
+                title: "Kelengkapan Profile",
+                subtitle: "Panduan untuk melengkapi profile",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PanduanKelengkapanProfilePage(),
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        shape: BoxShape.circle,
-                      ),
-                    child: Icon(Icons.person, color: Colors.blue[900], size: 30),
-                    ),
-                    SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Kelengkapan Profile",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Panduan untuk melengkapi profile",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
 
-              // === CARD 5 ===
-              Container(
-                margin: EdgeInsets.only(bottom: 12),
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+              buildCard(
+                icon: Icons.folder_copy,
+                title: "Mengelola Portfolio",
+                subtitle:
+                    "Panduan untuk menambah, edit, dan hapus portfolio",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PanduanPortfolioPage(),
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        shape: BoxShape.circle,
-                      ),
-                    child: Icon(Icons.folder_copy, color: Colors.blue[900], size: 30),
-                    ),
-                    SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Mengelola Portfolio",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Panduan untuk menambah, edit, dan hapus portfolio",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
 
-              // === CARD 6 ===
-              Container(
-                margin: EdgeInsets.only(bottom: 12),
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+              buildCard(
+                icon: Icons.verified,
+                title: "Mengelola Sertifikat",
+                subtitle:
+                    "Panduan untuk menambah, edit, dan hapus sertifikat",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PanduanSertifikatPage(),
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        shape: BoxShape.circle,
-                      ),
-                    child: Icon(Icons.verified, color: Colors.blue[900], size: 30),
-                    ),
-                    SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Mengelola Sertifikat",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Panduan untuk menambah, edit, dan hapus sertifikat",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
 
-              // === CARD 7 ===
-              Container(
-                margin: EdgeInsets.only(bottom: 12),
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+              buildCard(
+                icon: Icons.info_outline,
+                title: "Catatan Sikap Saya",
+                subtitle:
+                    "Panduan untuk melihat dan memahami catatan sikap",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PanduanCatatanSikapPage(),
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        shape: BoxShape.circle,
-                      ),
-                    child: Icon(Icons.info_outline, color: Colors.blue[900], size: 30),
-                    ),
-                    SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Catatan Sikap Saya",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "Panduan untuk melihat dan memahami catatan sikap",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ],
           ),
