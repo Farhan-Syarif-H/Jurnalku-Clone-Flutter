@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_clone/dashboard_page.dart';
+import 'package:jurnalku_clone/login_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_catatan_sikap_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_ganti_password_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_kelengkapan_profile_page.dart';
@@ -6,9 +8,25 @@ import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_mengisi_
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_portfolio_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_sertifikat_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_unggah_profile_page.dart';
+import 'package:jurnalku_clone/pengaturan_akun_page.dart';
 
 class PanduanPenggunaPage extends StatelessWidget {
   const PanduanPenggunaPage({super.key});
+  PopupMenuItem<int> _menuItem(IconData icon, String label, int value) {
+    return PopupMenuItem<int>(
+      value: value,
+      child: Row(
+        children: [
+          Icon(icon, size: 20, color: Colors.blueGrey),
+          const SizedBox(width: 14),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 15, color: Colors.blueGrey),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget buildCard({
     required IconData icon,
@@ -62,10 +80,7 @@ class PanduanPenggunaPage extends StatelessWidget {
                   SizedBox(height: 3),
                   Text(
                     subtitle,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[700],
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                   ),
                 ],
               ),
@@ -80,26 +95,19 @@ class PanduanPenggunaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
+      // ================= APP BAR ====================
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          color: Colors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(Icons.home, color: Colors.black),
+              // Home icon
+              const Icon(Icons.home, color: Colors.black),
 
+              // ================= NAMA USER + AVATAR ====================
               Row(
                 children: [
                   Column(
@@ -120,14 +128,146 @@ class PanduanPenggunaPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(width: 10),
-                  ClipOval(
-                    child: Image.asset(
-                      'assets/images/profile-blank.jpg',
-                      width: 40,
-                      height: 40,
-                      fit: BoxFit.cover,
+                  const SizedBox(width: 10),
+
+                  // ================= DROPDOWN PROFILE ====================
+                  PopupMenuButton<int>(
+                    offset: const Offset(0, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
+                    elevation: 6,
+                    color: Colors.white,
+
+                    // ================== ON SELECTED ==================
+                    onSelected: (value) {
+                      switch (value) {
+                        case 1: // Dashboard
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => DashboardPage()),
+                          );
+                          break;
+
+                        // case 2: // Profil
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => ProfilPage()),
+                        //   );
+                        //   break;
+
+                        // case 3: // Jelajahi
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => JelajahiPage()),
+                        //   );
+                        //   break;
+
+                        // case 4: // Jurnal Pembiasaan
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
+                        //   );
+                        //   break;
+
+                        // case 5: // Permintaan Saksi
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => PermintaanSaksiPage()),
+                        //   );
+                        //   break;
+
+                        // case 6: // Progress
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => ProgressPage()),
+                        //   );
+                        //   break;
+
+                        // case 7: // Catatan Sikap
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => CatatanSikapPage()),
+                        //   );
+                        //   break;
+
+                        case 8: // Panduan Pengguna
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PanduanPenggunaPage(),
+                            ),
+                          );
+                          break;
+
+                        case 9: // Pengaturan Akun
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PengaturanAkunPage(),
+                            ),
+                          );
+                          break;
+
+                        case 10: // Log Out
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text("Log Out"),
+                              content: const Text("Yakin mau keluar, mbut?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("Batal"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); // tutup dialog
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => LoginPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text("Log Out"),
+                                ),
+                              ],
+                            ),
+                          );
+                          break;
+                      }
+                    },
+
+                    // ================== AVATAR BUTTON ==================
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/profile-blank.jpg',
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+
+                    // ================== MENU ITEM ==================
+                    itemBuilder: (context) => [
+                      _menuItem(Icons.dashboard, "Dashboard", 1),
+                      _menuItem(Icons.person, "Profil", 2),
+                      _menuItem(Icons.explore, "Jelajahi", 3),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.menu_book, "Jurnal Pembiasaan", 4),
+                      _menuItem(Icons.people, "Permintaan Saksi", 5),
+                      _menuItem(Icons.bar_chart, "Progress", 6),
+                      _menuItem(Icons.report, "Catatan Sikap", 7),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.help_outline, "Panduan Pengguna", 8),
+                      _menuItem(Icons.settings, "Pengaturan Akun", 9),
+                      _menuItem(Icons.logout, "Log Out", 10),
+                    ],
                   ),
                 ],
               ),
@@ -170,10 +310,7 @@ class PanduanPenggunaPage extends StatelessWidget {
               // ================================= UMUM =================================
               Text(
                 "Umum",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 12),
 
@@ -208,10 +345,7 @@ class PanduanPenggunaPage extends StatelessWidget {
               // ============================= UNTUK SISWA ==============================
               Text(
                 "Untuk Siswa",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 12),
 
@@ -246,8 +380,7 @@ class PanduanPenggunaPage extends StatelessWidget {
               buildCard(
                 icon: Icons.folder_copy,
                 title: "Mengelola Portfolio",
-                subtitle:
-                    "Panduan untuk menambah, edit, dan hapus portfolio",
+                subtitle: "Panduan untuk menambah, edit, dan hapus portfolio",
                 onTap: () {
                   Navigator.push(
                     context,
@@ -261,8 +394,7 @@ class PanduanPenggunaPage extends StatelessWidget {
               buildCard(
                 icon: Icons.verified,
                 title: "Mengelola Sertifikat",
-                subtitle:
-                    "Panduan untuk menambah, edit, dan hapus sertifikat",
+                subtitle: "Panduan untuk menambah, edit, dan hapus sertifikat",
                 onTap: () {
                   Navigator.push(
                     context,
@@ -276,8 +408,7 @@ class PanduanPenggunaPage extends StatelessWidget {
               buildCard(
                 icon: Icons.info_outline,
                 title: "Catatan Sikap Saya",
-                subtitle:
-                    "Panduan untuk melihat dan memahami catatan sikap",
+                subtitle: "Panduan untuk melihat dan memahami catatan sikap",
                 onTap: () {
                   Navigator.push(
                     context,
