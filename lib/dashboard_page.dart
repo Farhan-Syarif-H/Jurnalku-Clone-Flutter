@@ -14,210 +14,210 @@ class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
   PopupMenuItem<int> _menuItem(IconData icon, String label, int value) {
-  return PopupMenuItem<int>(
-    value: value,
-    child: Row(
-      children: [
-        Icon(icon, size: 20, color: Colors.blueGrey),
-        const SizedBox(width: 14),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 15,
-            color: Colors.blueGrey),
-        ),
-      ],
-    ),
-  );
-}
-
+    return PopupMenuItem<int>(
+      value: value,
+      child: Row(
+        children: [
+          Icon(icon, size: 20, color: Colors.blueGrey),
+          const SizedBox(width: 14),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 15, color: Colors.blueGrey),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       // ================= APP BAR ====================
-appBar: PreferredSize(
-  preferredSize: const Size.fromHeight(60),
-  child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    color: Colors.white,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Home icon
+              const Icon(Icons.home, color: Colors.black),
 
-        // Home icon
-        const Icon(Icons.home, color: Colors.black),
-
-        // ================= NAMA USER + AVATAR ====================
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "M. Arizqy Khylmi Alkazhia",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                Text(
-                  "PPLG XII-3",
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-              ],
-            ),
-            const SizedBox(width: 10),
-
-            // ================= DROPDOWN PROFILE ====================
-            PopupMenuButton<int>(
-              offset: const Offset(0, 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              elevation: 6,
-              color: Colors.white,
-
-              // ================== ON SELECTED ==================
-              onSelected: (value) {
-                switch (value) {
-                  case 1: // Dashboard
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => DashboardPage()),
-                    );
-                    break;
-
-                  // case 2: // Profil
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (_) => ProfilPage()),
-                  //   );
-                  //   break;
-
-                  // case 3: // Jelajahi
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (_) => JelajahiPage()),
-                  //   );
-                  //   break;
-
-                  // case 4: // Jurnal Pembiasaan
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
-                  //   );
-                  //   break;
-
-                  // case 5: // Permintaan Saksi
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (_) => PermintaanSaksiPage()),
-                  //   );
-                  //   break;
-
-                  // case 6: // Progress
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (_) => ProgressPage()),
-                  //   );
-                  //   break;
-
-                  // case 7: // Catatan Sikap
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (_) => CatatanSikapPage()),
-                  //   );
-                  //   break;
-
-                  case 8: // Panduan Pengguna
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => PanduanPenggunaPage()),
-                    );
-                    break;
-
-                  case 9: // Pengaturan Akun
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => PengaturanAkunPage()),
-                    );
-                    break;
-
-                  case 10: // Log Out
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: const Text("Log Out"),
-                        content: const Text("Yakin mau keluar, mbut?"),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text("Batal"),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context); // tutup dialog
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (_) => LoginPage()),
-                              );
-                            },
-                            child: const Text("Log Out"),
-                          ),
-                        ],
+              // ================= NAMA USER + AVATAR ====================
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "M. Arizqy Khylmi Alkazhia",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
-                    );
-                    break;
-                }
-              },
+                      Text(
+                        "PPLG XII-3",
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 10),
 
-              // ================== AVATAR BUTTON ==================
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/images/profile-blank.jpg',
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.cover,
-                ),
+                  // ================= DROPDOWN PROFILE ====================
+                  PopupMenuButton<int>(
+                    offset: const Offset(0, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: 6,
+                    color: Colors.white,
+
+                    // ================== ON SELECTED ==================
+                    onSelected: (value) {
+                      switch (value) {
+                        case 1: // Dashboard
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => DashboardPage()),
+                          );
+                          break;
+
+                        // case 2: // Profil
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => ProfilPage()),
+                        //   );
+                        //   break;
+
+                        // case 3: // Jelajahi
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => JelajahiPage()),
+                        //   );
+                        //   break;
+
+                        // case 4: // Jurnal Pembiasaan
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
+                        //   );
+                        //   break;
+
+                        // case 5: // Permintaan Saksi
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => PermintaanSaksiPage()),
+                        //   );
+                        //   break;
+
+                        // case 6: // Progress
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => ProgressPage()),
+                        //   );
+                        //   break;
+
+                        // case 7: // Catatan Sikap
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => CatatanSikapPage()),
+                        //   );
+                        //   break;
+
+                        case 8: // Panduan Pengguna
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PanduanPenggunaPage(),
+                            ),
+                          );
+                          break;
+
+                        case 9: // Pengaturan Akun
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PengaturanAkunPage(),
+                            ),
+                          );
+                          break;
+
+                        case 10: // Log Out
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text("Log Out"),
+                              content: const Text("Yakin mau keluar, mbut?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("Batal"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); // tutup dialog
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => LoginPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text("Log Out"),
+                                ),
+                              ],
+                            ),
+                          );
+                          break;
+                      }
+                    },
+
+                    // ================== AVATAR BUTTON ==================
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/profile-blank.jpg',
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+
+                    // ================== MENU ITEM ==================
+                    itemBuilder: (context) => [
+                      _menuItem(Icons.dashboard, "Dashboard", 1),
+                      _menuItem(Icons.person, "Profil", 2),
+                      _menuItem(Icons.explore, "Jelajahi", 3),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.menu_book, "Jurnal Pembiasaan", 4),
+                      _menuItem(Icons.people, "Permintaan Saksi", 5),
+                      _menuItem(Icons.bar_chart, "Progress", 6),
+                      _menuItem(Icons.report, "Catatan Sikap", 7),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.help_outline, "Panduan Pengguna", 8),
+                      _menuItem(Icons.settings, "Pengaturan Akun", 9),
+                      _menuItem(Icons.logout, "Log Out", 10),
+                    ],
+                  ),
+                ],
               ),
-
-              // ================== MENU ITEM ==================
-              itemBuilder: (context) => [
-                _menuItem(Icons.dashboard, "Dashboard", 1),
-                _menuItem(Icons.person, "Profil", 2),
-                _menuItem(Icons.explore, "Jelajahi", 3),
-
-                const PopupMenuDivider(),
-
-                _menuItem(Icons.menu_book, "Jurnal Pembiasaan", 4),
-                _menuItem(Icons.people, "Permintaan Saksi", 5),
-                _menuItem(Icons.bar_chart, "Progress", 6),
-                _menuItem(Icons.report, "Catatan Sikap", 7),
-
-                const PopupMenuDivider(),
-
-                _menuItem(Icons.help_outline, "Panduan Pengguna", 8),
-                _menuItem(Icons.settings, "Pengaturan Akun", 9),
-                _menuItem(Icons.logout, "Log Out", 10),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
-      ],
-    ),
-  ),
-),
-
+      ),
 
       // ================= BODY ====================
       body: SingleChildScrollView(
         child: Column(
           children: [
-
             // ===================HEADER JURNALKU========================================
             Container(
               height: 220,
@@ -245,15 +245,12 @@ appBar: PreferredSize(
                         SizedBox(height: 8),
                         Text(
                           "Solusi cerdas untuk memantau perkembangan\nkompetensi siswa secara efektif",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
+                          style: TextStyle(color: Colors.white, fontSize: 14),
                           textAlign: TextAlign.center,
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -343,13 +340,9 @@ appBar: PreferredSize(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   const Text(
                     "Menu Aplikasi",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
 
                   const SizedBox(height: 18),
@@ -397,7 +390,8 @@ appBar: PreferredSize(
                           child: MenuRow(
                             icon: Icons.work_outline,
                             title: "Portofolio",
-                            subtitle: "Lihat dan kelola portofolio kompetensimu.",
+                            subtitle:
+                                "Lihat dan kelola portofolio kompetensimu.",
                           ),
                         ),
                         _divider(),
@@ -413,7 +407,8 @@ appBar: PreferredSize(
                           child: MenuRow(
                             icon: Icons.work_outline,
                             title: "Sertifikat",
-                            subtitle: "Lihat dan unduh sertifikat kompetensimu.",
+                            subtitle:
+                                "Lihat dan unduh sertifikat kompetensimu.",
                           ),
                         ),
                       ],
@@ -440,7 +435,8 @@ appBar: PreferredSize(
                         MenuRow(
                           icon: Icons.menu_book_outlined,
                           title: "Jurnal Pembiasaan",
-                          subtitle: "Catat dan pantau kegiatan pembiasaan harianmu.",
+                          subtitle:
+                              "Catat dan pantau kegiatan pembiasaan harianmu.",
                         ),
                         _divider(),
                         GestureDetector(
@@ -455,7 +451,8 @@ appBar: PreferredSize(
                           child: MenuRow(
                             icon: Icons.person_search_outlined,
                             title: "Permintaan Saksi",
-                            subtitle: "Lihat teman yang mengajukan permintaan saksi.",
+                            subtitle:
+                                "Lihat teman yang mengajukan permintaan saksi.",
                           ),
                         ),
                         _divider(),
@@ -472,7 +469,7 @@ appBar: PreferredSize(
                             icon: Icons.bar_chart_outlined,
                             title: "Progress",
                             subtitle:
-                              "Lihat kemajuan kompetensi dan pencapaian belajarmu.",
+                                "Lihat kemajuan kompetensi dan pencapaian belajarmu.",
                           ),
                         ),
                         _divider(),
@@ -489,7 +486,7 @@ appBar: PreferredSize(
                             icon: Icons.warning_amber_outlined,
                             title: "Catatan Sikap",
                             subtitle:
-                              "Lihat catatan sikap dan perilaku dari guru.",
+                                "Lihat catatan sikap dan perilaku dari guru.",
                           ),
                         ),
                       ],
@@ -501,10 +498,7 @@ appBar: PreferredSize(
                   // ===STATISTIK KOMPETENSI===
                   const Text(
                     "Statistik Kompetensi",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
 
                   const SizedBox(height: 18),
@@ -554,10 +548,7 @@ appBar: PreferredSize(
                   // ===PROGRESS AKADEMIK===
                   const Text(
                     "Progress Akademik",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
 
                   const SizedBox(height: 18),
@@ -657,18 +648,11 @@ appBar: PreferredSize(
               color: Color(0xFFE8F1FF),
               child: Row(
                 children: const [
-                  Icon(
-                    Icons.copyright,
-                    size: 16,
-                    color: Color(0xFF1F4ED8),
-                  ),
+                  Icon(Icons.copyright, size: 16, color: Color(0xFF1F4ED8)),
                   SizedBox(width: 6),
                   Text(
                     "GEN-28 PPLG SMK Wikrama Bogor. All Rights Reserved.",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Color(0xFF1F4ED8),
-                    ),
+                    style: TextStyle(fontSize: 13, color: Color(0xFF1F4ED8)),
                   ),
                 ],
               ),
@@ -680,13 +664,9 @@ appBar: PreferredSize(
   }
 }
 
-      Widget _divider() {
-        return Divider(
-          height: 1,
-          thickness: 1,
-          color: Colors.grey.shade200,
-        );
-      }
+Widget _divider() {
+  return Divider(height: 1, thickness: 1, color: Colors.grey.shade200);
+}
 
 /// FEATURE CARD — V2
 
@@ -720,11 +700,7 @@ class FeatureCardV2 extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Icon(
-            icon,
-            size: 54,
-            color: const Color(0xFF1F4ED8),
-          ),
+          Icon(icon, size: 54, color: const Color(0xFF1F4ED8)),
           const SizedBox(height: 18),
 
           Text(
@@ -771,10 +747,7 @@ class MenuRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 18,
-        horizontal: 20,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -814,11 +787,7 @@ class MenuRow extends StatelessWidget {
             ),
           ),
 
-          const Icon(
-            Icons.arrow_forward_ios,
-            size: 16,
-            color: Colors.black45,
-          ),
+          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black45),
         ],
       ),
     );
@@ -858,7 +827,7 @@ class StatCard extends StatelessWidget {
             color: Colors.black.withOpacity(0.05),
             blurRadius: 12,
             offset: const Offset(0, 4),
-          )
+          ),
         ],
       ),
       child: Row(
@@ -911,7 +880,7 @@ class StatCard extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -919,16 +888,9 @@ class StatCard extends StatelessWidget {
           // ICON
           Container(
             padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: iconBg,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              size: 28,
-              color: statusColor,
-            ),
-          )
+            decoration: BoxDecoration(color: iconBg, shape: BoxShape.circle),
+            child: Icon(icon, size: 28, color: statusColor),
+          ),
         ],
       ),
     );
@@ -946,28 +908,13 @@ Widget _progressItem(String label, String value, Color dotColor) {
           Container(
             width: 12,
             height: 12,
-            decoration: BoxDecoration(
-              color: dotColor,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: dotColor, shape: BoxShape.circle),
           ),
           SizedBox(width: 10),
-          Text(
-            label,
-            style:  TextStyle(
-              fontSize: 15,
-              color: Colors.black87,
-            ),
-          ),
+          Text(label, style: TextStyle(fontSize: 15, color: Colors.black87)),
         ],
       ),
-      Text(
-        value,
-        style: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
+      Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
     ],
   );
 }
