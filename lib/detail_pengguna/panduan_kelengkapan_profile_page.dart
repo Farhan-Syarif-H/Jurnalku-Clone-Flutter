@@ -103,7 +103,7 @@ class PanduanKelengkapanProfilePage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 100),
+                SizedBox(width: 80),
                 Text(
                   "Kelengkapan\nProfil",
                   style: TextStyle(
