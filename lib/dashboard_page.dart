@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jurnalku_clone/catatan-sikap/catatan_sikap_page.dart';
 import 'package:jurnalku_clone/login_page.dart';
-import 'package:jurnalku_clone/panduan_pengguna.dart';
+import 'package:jurnalku_clone/panduan-pengguna/panduan_pengguna.dart';
 import 'package:jurnalku_clone/pengaturan_akun_page.dart';
+import 'package:jurnalku_clone/permintaan_saksi.dart';
+import 'package:jurnalku_clone/profile/portofolio_component.dart';
+import 'package:jurnalku_clone/profile/profile_page.dart';
+import 'package:jurnalku_clone/profile/sertifikat_component.dart';
+import 'package:jurnalku_clone/progress/progress_belajar.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -363,22 +369,52 @@ appBar: PreferredSize(
 
                     child: Column(
                       children: [
-                        MenuRow(
-                          icon: Icons.person_outline,
-                          title: "Profil",
-                          subtitle: "Lihat dan kelola profilmu di sini.",
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfilePage(),
+                              ),
+                            );
+                          },
+                          child: MenuRow(
+                            icon: Icons.person_outline,
+                            title: "Profil",
+                            subtitle: "Lihat dan kelola profilmu di sini.",
+                          ),
                         ),
                         _divider(),
-                        MenuRow(
-                          icon: Icons.work_outline,
-                          title: "Portofolio",
-                          subtitle: "Lihat dan kelola portofolio kompetensimu.",
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PortofolioComponent(),
+                              ),
+                            );
+                          },
+                          child: MenuRow(
+                            icon: Icons.work_outline,
+                            title: "Portofolio",
+                            subtitle: "Lihat dan kelola portofolio kompetensimu.",
+                          ),
                         ),
                         _divider(),
-                        MenuRow(
-                          icon: Icons.workspace_premium_outlined,
-                          title: "Sertifikat",
-                          subtitle: "Lihat dan unduh sertifikat kompetensimu.",
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SertifikatComponent(),
+                              ),
+                            );
+                          },
+                          child: MenuRow(
+                            icon: Icons.work_outline,
+                            title: "Sertifikat",
+                            subtitle: "Lihat dan unduh sertifikat kompetensimu.",
+                          ),
                         ),
                       ],
                     ),
@@ -407,24 +443,54 @@ appBar: PreferredSize(
                           subtitle: "Catat dan pantau kegiatan pembiasaan harianmu.",
                         ),
                         _divider(),
-                        MenuRow(
-                          icon: Icons.person_search_outlined,
-                          title: "Permintaan Saksi",
-                          subtitle: "Lihat teman yang mengajukan permintaan saksi.",
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PermintaanSaksi(),
+                              ),
+                            );
+                          },
+                          child: MenuRow(
+                            icon: Icons.person_search_outlined,
+                            title: "Permintaan Saksi",
+                            subtitle: "Lihat teman yang mengajukan permintaan saksi.",
+                          ),
                         ),
                         _divider(),
-                        MenuRow(
-                          icon: Icons.bar_chart_outlined,
-                          title: "Progress",
-                          subtitle:
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProgressBelajar(),
+                              ),
+                            );
+                          },
+                          child: MenuRow(
+                            icon: Icons.bar_chart_outlined,
+                            title: "Progress",
+                            subtitle:
                               "Lihat kemajuan kompetensi dan pencapaian belajarmu.",
+                          ),
                         ),
                         _divider(),
-                        MenuRow(
-                          icon: Icons.warning_amber_outlined,
-                          title: "Catatan Sikap",
-                          subtitle:
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CatatanSikapPage(),
+                              ),
+                            );
+                          },
+                          child: MenuRow(
+                            icon: Icons.warning_amber_outlined,
+                            title: "Catatan Sikap",
+                            subtitle:
                               "Lihat catatan sikap dan perilaku dari guru.",
+                          ),
                         ),
                       ],
                     ),
