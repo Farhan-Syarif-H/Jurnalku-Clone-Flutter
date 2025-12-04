@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_clone/explore_page.dart';
+import 'package:jurnalku_clone/progress/gim_project_detail_page.dart';
+import 'package:jurnalku_clone/progress/mobile_apps_detail_page.dart';
+import 'package:jurnalku_clone/progress/project_work_detail_page.dart';
+import 'package:jurnalku_clone/progress/ukk_detail_page.dart';
 
 class ProgressBelajar extends StatefulWidget {
   const ProgressBelajar({super.key});
@@ -96,7 +100,7 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue.shade50
+                    color: Colors.blue.shade50,
                   ),
                   child: Text(
                     "Thursday, 20 November 2025",
@@ -116,10 +120,7 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 0.5,
-                ),
+                border: Border.all(color: Colors.grey, width: 0.5),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.05),
@@ -190,17 +191,14 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                 ],
               ),
             ),
-            SizedBox(height: 25,),
+            SizedBox(height: 25),
             //card 2
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 0.5,
-                ),
+                border: Border.all(color: Colors.grey, width: 0.5),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.05),
@@ -271,17 +269,14 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                 ],
               ),
             ),
-            SizedBox(height: 25,),
+            SizedBox(height: 25),
             //card 3
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 0.5,
-                ),
+                border: Border.all(color: Colors.grey, width: 0.5),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.05),
@@ -357,18 +352,8 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  width: 0.5,
-                  color: Colors.grey,
-                ),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.grey.shade100,
-                    Colors.grey.shade200
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  )
+                border: Border.all(width: 0.5, color: Colors.grey),
+                color: Colors.grey.shade100,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -379,47 +364,183 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Project Work",
+                          "Gim",
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(height: 5),
                         Text(
                           "Kompetensi dan materi pembelajaran",
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[600],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                  //garis 
-                  Divider(
-                    height: 1,
-                    color: Colors.grey[300],
-                  ),
-                  
-                  
+                  //garis
+                  Divider(height: 1, color: Colors.grey[300]),
+
+                  //1
                   Card(
+                    color: Colors.white,
                     margin: EdgeInsets.all(12),
                     elevation: 2,
-                    child: ExpansionTile(
-                      title: Text("Nama Project Work"),
-                      childrenPadding: EdgeInsets.all(16),
-                      children: [
-                        tampilProjectWork("Kompetensi", ""),
-                        tampilProjectWork("Guru", ""),
-                        tampilProjectWork("Tanggal", ""),
-                        tampilProjectWork("Status", ""),
-                        tampilProjectWork("Catatan Guru", ""),
-                        tampilProjectWork("Catatan Siswa", ""),
-                      ],
+                    child: Theme(
+                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text("Nama Project Work"),
+                        subtitle: Text("Kompetensi 1"),
+                        childrenPadding: EdgeInsets.all(16),
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GimProjectDetailPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue.shade50,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                textStyle: TextStyle(fontSize: 16),
+                              ),
+                              child: Text(
+                                "Detail Project Work",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ) 
+                  ),
+                  //2
+                  Card(
+                    color: Colors.white,
+                    margin: EdgeInsets.all(12),
+                    elevation: 2,
+                    child: Theme(
+                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text("Nama Project Work"),
+                        subtitle: Text("Kompetensi 1"),
+                        childrenPadding: EdgeInsets.all(16),
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProjectWorkDetailPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue.shade50,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                textStyle: TextStyle(fontSize: 16),
+                              ),
+                              child: Text(
+                                "Detail Project Work",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //3
+                  Card(
+                    color: Colors.white,
+                    margin: EdgeInsets.all(12),
+                    elevation: 2,
+                    child: Theme(
+                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text("Nama Project Work"),
+                        subtitle: Text("Kompetensi 1"),
+                        childrenPadding: EdgeInsets.all(16),
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProjectWorkDetailPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue.shade50,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                textStyle: TextStyle(fontSize: 16),
+                              ),
+                              child: Text(
+                                "Detail Project Work",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //4
+                  Card(
+                    color: Colors.white,
+                    margin: EdgeInsets.all(12),
+                    elevation: 2,
+                    child: Theme(
+                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text("Nama Project Work"),
+                        subtitle: Text("Kompetensi 1"),
+                        childrenPadding: EdgeInsets.all(16),
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProjectWorkDetailPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue.shade50,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                textStyle: TextStyle(fontSize: 16),
+                              ),
+                              child: Text(
+                                "Detail Project Work",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -428,18 +549,8 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  width: 0.5,
-                  color: Colors.grey,
-                ),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.grey.shade100,
-                    Colors.grey.shade200
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  )
+                border: Border.all(width: 0.5, color: Colors.grey),
+                color: Colors.grey.shade100,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -457,61 +568,69 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                             color: Colors.black87,
                           ),
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(height: 5),
                         Text(
                           "Kompetensi dan materi pembelajaran",
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[600],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                  //garis 
-                  Divider(
-                    height: 1,
-                    color: Colors.grey[300],
-                  ),
-                  
-                  
+                  //garis
+                  Divider(height: 1, color: Colors.grey[300]),
+
                   Card(
+                    color: Colors.white,
                     margin: EdgeInsets.all(12),
                     elevation: 2,
-                    child: ExpansionTile(
-                      title: Text("Nama Project Mobile Apps"),
-                      childrenPadding: EdgeInsets.all(16),
-                      children: [
-                        tampilProjectWork("Kompetensi", ""),
-                        tampilProjectWork("Guru", ""),
-                        tampilProjectWork("Tanggal", ""),
-                        tampilProjectWork("Status", ""),
-                        tampilProjectWork("Catatan Guru", ""),
-                        tampilProjectWork("Catatan Siswa", ""),
-                      ],
+                    child: Theme(
+                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text("Nama Mobile Apps"),
+                        subtitle: Text("Kompetensi 1"),
+                        childrenPadding: EdgeInsets.all(16),
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MobileAppsDetailPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue.shade50,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                textStyle: TextStyle(fontSize: 16),
+                              ),
+                              child: Text(
+                                "Detail Mobile Apps",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ) 
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
 
             // Table UKK
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  width: 0.5,
-                  color: Colors.grey,
-                ),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.grey.shade100,
-                    Colors.grey.shade200
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  )
+                border: Border.all(width: 0.5, color: Colors.grey),
+                color: Colors.grey.shade100,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -529,61 +648,69 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                             color: Colors.black87,
                           ),
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(height: 5),
                         Text(
                           "Kompetensi dan materi pembelajaran",
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[600],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                  //garis 
-                  Divider(
-                    height: 1,
-                    color: Colors.grey[300],
-                  ),
-                  
-                  
+                  //garis
+                  Divider(height: 1, color: Colors.grey[300]),
+
                   Card(
+                    color: Colors.white,
                     margin: EdgeInsets.all(12),
                     elevation: 2,
-                    child: ExpansionTile(
-                      title: Text("Nama Project UKK"),
-                      childrenPadding: EdgeInsets.all(16),
-                      children: [
-                        tampilProjectWork("Kompetensi", ""),
-                        tampilProjectWork("Guru", ""),
-                        tampilProjectWork("Tanggal", ""),
-                        tampilProjectWork("Status", ""),
-                        tampilProjectWork("Catatan Guru", ""),
-                        tampilProjectWork("Catatan Siswa", ""),
-                      ],
+                    child: Theme(
+                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text("Nama Project UKK"),
+                        subtitle: Text("Kompetensi"),
+                        childrenPadding: EdgeInsets.all(16),
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UkkDetailPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue.shade50,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                textStyle: TextStyle(fontSize: 16),
+                              ),
+                              child: Text(
+                                "Detail UKK",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ) 
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
 
             //table Gim
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  width: 0.5,
-                  color: Colors.grey,
-                ),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.grey.shade100,
-                    Colors.grey.shade200
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  )
+                border: Border.all(width: 0.5, color: Colors.grey),
+                color: Colors.grey.shade100,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -601,40 +728,59 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                             color: Colors.black87,
                           ),
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(height: 5),
                         Text(
                           "Kompetensi dan materi pembelajaran",
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[600],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                  //garis 
-                  Divider(
-                    height: 1,
-                    color: Colors.grey[300],
-                  ),
-                  
-                  
+                  //garis
+                  Divider(height: 1, color: Colors.grey[300]),
+
+                  //1
                   Card(
+                    color: Colors.white,
                     margin: EdgeInsets.all(12),
                     elevation: 2,
-                    child: ExpansionTile(
-                      title: Text("Nama Project GIM"),
-                      childrenPadding: EdgeInsets.all(16),
-                      children: [
-                        tampilProjectWork("Kompetensi", ""),
-                        tampilProjectWork("Guru", ""),
-                        tampilProjectWork("Tanggal", ""),
-                        tampilProjectWork("Status", ""),
-                        tampilProjectWork("Catatan Guru", ""),
-                        tampilProjectWork("Catatan Siswa", ""),
-                      ],
+                    child: Theme(
+                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text("Nama Project GIM"),
+                        subtitle: Text("Kompetensi 1"),
+                        childrenPadding: EdgeInsets.all(16),
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GimProjectDetailPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue.shade50,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                textStyle: TextStyle(fontSize: 16),
+                              ),
+                              child: Text(
+                                "Detail Project GIM",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ) 
+                  ),
                 ],
               ),
             ),
@@ -645,14 +791,12 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
   }
 }
 
-Widget tampilProjectWork(String projectWork, String value) {
+Widget tampilCard(String projectWork, String value) {
   return Padding(
     padding: EdgeInsets.all(10),
     child: Row(
-      children: [
-        SizedBox(width: 100, child: Text(projectWork)),
-        Expanded(child: Text(value))
-      ],
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [Text(projectWork), Text(value)],
     ),
   );
 }
