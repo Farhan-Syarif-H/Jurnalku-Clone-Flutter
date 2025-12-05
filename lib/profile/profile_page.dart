@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_clone/catatan-sikap/catatan_sikap_page.dart';
+import 'package:jurnalku_clone/dashboard_page.dart';
 import 'package:jurnalku_clone/explore_page.dart';
+import 'package:jurnalku_clone/jurnal-pembiasaan/jurnal_pembiasaan_page.dart';
+import 'package:jurnalku_clone/login_page.dart';
+import 'package:jurnalku_clone/panduan-pengguna/panduan_pengguna.dart';
+import 'package:jurnalku_clone/pengaturan_akun_page.dart';
+import 'package:jurnalku_clone/permintaan_saksi.dart';
+import 'package:jurnalku_clone/progress/progress_belajar.dart';
 import 'portofolio_component.dart';
 import 'sertifikat_component.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+  
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
+}
+  PopupMenuItem<int> _menuItem(IconData icon, String label, int value) {
+  return PopupMenuItem<int>(
+    value: value,
+    child: Row(
+      children: [
+        Icon(icon, size: 20, color: Colors.blueGrey),
+        const SizedBox(width: 14),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 15,
+            color: Colors.blueGrey),
+        ),
+      ],
+    ),
+  );
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -17,61 +43,174 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      // ================= APP BAR ====================
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              bottom: BorderSide(color: Color(0xFFE2E8F0), width: 2),
-            ),
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          color: Colors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ExplorePage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  minimumSize: Size(40, 40),
-                ),
-                child: Icon(Icons.home, size: 25, color: Color(0xFF64748B)),
-              ),
 
+              // Home icon
+              const Icon(Icons.home, color: Colors.black),
+
+              // ================= NAMA USER + AVATAR ====================
               Row(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text(
-                        "Farhan Syarif Hidayatulloh",
+                        "M. Arizqy Khylmi Alkazhia",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.grey[800],
+                          color: Colors.black,
                         ),
                       ),
                       Text(
                         "PPLG XII-3",
-                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
                     ],
                   ),
-                  SizedBox(width: 10),
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundImage: AssetImage(
-                      "assets/images/profile-blank.jpg",
+                  const SizedBox(width: 10),
+
+                  // ================= DROPDOWN PROFILE ====================
+                  PopupMenuButton<int>(
+                    offset: const Offset(0, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
+                    elevation: 6,
+                    color: Colors.white,
+
+                    // ================== ON SELECTED ==================
+                    onSelected: (value) {
+                      switch (value) {
+                        case 1: // Dashboard
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => DashboardPage()),
+                          );
+                          break;
+
+                        case 2: // Profil
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ProfilePage()),
+                          );
+                          break;
+
+                        case 3: // Jelajahi
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ExplorePage()),
+                          );
+                          break;
+
+                        case 4: // Jurnal Pembiasaan
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
+                          );
+                          break;
+
+                        case 5: // Permintaan Saksi
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => PermintaanSaksi()),
+                          );
+                          break;
+
+                        case 6: // Progress
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ProgressBelajar()),
+                          );
+                          break;
+
+                        case 7: // Catatan Sikap
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => CatatanSikapPage()),
+                          );
+                          break;
+
+                        case 8: // Panduan Pengguna
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => PanduanPenggunaPage()),
+                          );
+                          break;
+
+                        case 9: // Pengaturan Akun
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => PengaturanAkunPage()),
+                          );
+                          break;
+
+                        case 10: // Log Out
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text("Log Out"),
+                              content: const Text("Yakin mau keluar, mbut?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("Batal"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); // tutup dialog
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (_) => LoginPage()),
+                                    );
+                                  },
+                                  child: const Text("Log Out"),
+                                ),
+                              ],
+                            ),
+                          );
+                          break;
+                      }
+                    },
+
+                    // ================== AVATAR BUTTON ==================
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/profile-blank.jpg',
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+
+                    // ================== MENU ITEM ==================
+                    itemBuilder: (context) => [
+                      _menuItem(Icons.dashboard, "Dashboard", 1),
+                      _menuItem(Icons.person, "Profil", 2),
+                      _menuItem(Icons.explore, "Jelajahi", 3),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.menu_book, "Jurnal Pembiasaan", 4),
+                      _menuItem(Icons.people, "Permintaan Saksi", 5),
+                      _menuItem(Icons.bar_chart, "Progress", 6),
+                      _menuItem(Icons.report, "Catatan Sikap", 7),
+
+                      const PopupMenuDivider(),
+
+                      _menuItem(Icons.help_outline, "Panduan Pengguna", 8),
+                      _menuItem(Icons.settings, "Pengaturan Akun", 9),
+                      _menuItem(Icons.logout, "Log Out", 10),
+                    ],
                   ),
                 ],
               ),
