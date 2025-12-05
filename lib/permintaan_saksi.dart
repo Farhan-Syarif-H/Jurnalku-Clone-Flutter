@@ -48,153 +48,135 @@ class PermintaanSaksi extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
+      body: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10),
-                Text(
-                  "Permintaan Saksi",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    Text(
+                      "Permintaan Saksi",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      "Kelola permintaan menjadi saksi dari siswa lain",
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 3),
-                Text(
-                  "Kelola permintaan menjadi saksi dari siswa lain",
-                  style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.blue[100],
+                  ),
+                  child: Text(
+                    "Wednesday, 19 November 2025",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.blue[800],
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 25),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.grey.shade300, width: 1.2),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 0.5, color: Colors.grey),
+                          color: Colors.grey.shade100,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Saksi",
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            //garis
+                            Divider(height: 1, color: Colors.grey[300]),
+
+                            Card(
+                              color: Colors.white,
+                              margin: EdgeInsets.all(12),
+                              elevation: 2,
+                              child: Theme(
+                                data: ThemeData().copyWith(
+                                  dividerColor: Colors.transparent,
+                                ),
+                                child: ExpansionTile(
+                                  title: Text("Aqila Hanin Nailah"),
+                                  childrenPadding: EdgeInsets.all(16),
+                                  children: [
+                                    tampilPermintaanSaksi("Tanggal", ""),
+                                    tampilPermintaanSaksi(
+                                      "Konfirmasi Status",
+                                      "",
+                                    ),
+                                    tampilPermintaanSaksi("Deskripsi", ""),
+                                    SizedBox(height: 10),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      
+                    ],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.blue[100],
-              ),
-              child: Text(
-                "Wednesday, 19 November 2025",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.blue[800],
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            SizedBox(height: 25),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey.shade300, width: 1.2),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 18),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(16),
-                      ),
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Colors.grey.shade300,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "PENGIRIM",
-                              style: TextStyle(
-                                fontSize: 14,
-                                letterSpacing: 0.5,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey[700],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "TANGGAL",
-                              style: TextStyle(
-                                fontSize: 14,
-                                letterSpacing: 0.5,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey[700],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "KONFIRMASI",
-                              style: TextStyle(
-                                fontSize: 14,
-                                letterSpacing: 0.5,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey[700],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(height: 45),
-                  Column(
-                    children: [
-                      Icon(
-                        Icons.groups_outlined,
-                        size: 58,
-                        color: Colors.grey[400],
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        "Belum ada permintaan",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 6),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30),
-                        child: Text(
-                          "Belum ada yang mengirim permintaan saksi kepada Anda",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                            height: 1.4,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 35),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
+}
+
+Widget tampilPermintaanSaksi(String projectWork, String value) {
+  return Padding(
+    padding: EdgeInsets.all(10),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [Text(projectWork), Text(value)],
+    ),
+  );
 }

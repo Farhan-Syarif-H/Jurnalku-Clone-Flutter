@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jurnalku_clone/catatan-sikap/catatan_sikap_page.dart';
+import 'package:jurnalku_clone/explore_page.dart';
 import 'package:jurnalku_clone/login_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/panduan_pengguna.dart';
 import 'package:jurnalku_clone/pengaturan_akun_page.dart';
@@ -87,19 +88,19 @@ class DashboardPage extends StatelessWidget {
                           );
                           break;
 
-                        // case 2: // Profil
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => ProfilPage()),
-                        //   );
-                        //   break;
+                        case 2: // Profil
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ProfilePage()),
+                          );
+                          break;
 
-                        // case 3: // Jelajahi
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => JelajahiPage()),
-                        //   );
-                        //   break;
+                        case 3: // Jelajahi
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ExplorePage()),
+                          );
+                          break;
 
                         // case 4: // Jurnal Pembiasaan
                         //   Navigator.push(
@@ -108,26 +109,26 @@ class DashboardPage extends StatelessWidget {
                         //   );
                         //   break;
 
-                        // case 5: // Permintaan Saksi
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => PermintaanSaksiPage()),
-                        //   );
-                        //   break;
+                        case 5: // Permintaan Saksi
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => PermintaanSaksi()),
+                          );
+                          break;
 
-                        // case 6: // Progress
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => ProgressPage()),
-                        //   );
-                        //   break;
+                        case 6: // Progress
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ProgressBelajar()),
+                          );
+                          break;
 
-                        // case 7: // Catatan Sikap
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => CatatanSikapPage()),
-                        //   );
-                        //   break;
+                        case 7: // Catatan Sikap
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => CatatanSikapPage()),
+                          );
+                          break;
 
                         case 8: // Panduan Pengguna
                           Navigator.push(

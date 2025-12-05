@@ -364,7 +364,7 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Gim",
+                          "Project Work",
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -405,7 +405,7 @@ class _ProgressBelajarState extends State<ProgressBelajar> with SingleTickerProv
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => GimProjectDetailPage(),
+                                    builder: (context) => ProjectWorkDetailPage(),
                                   ),
                                 );
                               },
