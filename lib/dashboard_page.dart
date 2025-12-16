@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jurnalku_clone/catatan-sikap/catatan_sikap_page.dart';
 import 'package:jurnalku_clone/explore_page.dart';
+import 'package:jurnalku_clone/jurnal-pembiasaan/jurnal_pembiasaan_page.dart';
 import 'package:jurnalku_clone/login_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/panduan_pengguna.dart';
 import 'package:jurnalku_clone/pengaturan_akun_page.dart';
@@ -102,12 +103,12 @@ class DashboardPage extends StatelessWidget {
                           );
                           break;
 
-                        // case 4: // Jurnal Pembiasaan
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
-                        //   );
-                        //   break;
+                        case 4: // Jurnal Pembiasaan
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
+                          );
+                          break;
 
                         case 5: // Permintaan Saksi
                           Navigator.push(
@@ -433,12 +434,22 @@ class DashboardPage extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        MenuRow(
+                         GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => JurnalPembiasaanPage(),
+                              ),
+                            );
+                          },
+                        child:MenuRow(
                           icon: Icons.menu_book_outlined,
                           title: "Jurnal Pembiasaan",
                           subtitle:
                               "Catat dan pantau kegiatan pembiasaan harianmu.",
                         ),
+                         ),
                         _divider(),
                         GestureDetector(
                           onTap: () {
