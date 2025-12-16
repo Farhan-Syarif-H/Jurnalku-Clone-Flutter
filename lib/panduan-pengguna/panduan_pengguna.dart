@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jurnalku_clone/catatan-sikap/catatan_sikap_page.dart';
 import 'package:jurnalku_clone/dashboard_page.dart';
+import 'package:jurnalku_clone/explore_page.dart';
+import 'package:jurnalku_clone/jurnal-pembiasaan/jurnal_pembiasaan_page.dart';
 import 'package:jurnalku_clone/login_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_catatan_sikap_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_ganti_password_page.dart';
@@ -9,6 +12,9 @@ import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_portfoli
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_sertifikat_page.dart';
 import 'package:jurnalku_clone/panduan-pengguna/detail_pengguna/panduan_unggah_profile_page.dart';
 import 'package:jurnalku_clone/pengaturan_akun_page.dart';
+import 'package:jurnalku_clone/permintaan_saksi.dart';
+import 'package:jurnalku_clone/profile/profile_page.dart';
+import 'package:jurnalku_clone/progress/progress_belajar.dart';
 
 class PanduanPenggunaPage extends StatelessWidget {
   const PanduanPenggunaPage({super.key});
@@ -139,7 +145,7 @@ class PanduanPenggunaPage extends StatelessWidget {
                     elevation: 6,
                     color: Colors.white,
 
-                    // ================== ON SELECTED ==================
+// ================== ON SELECTED ==================
                     onSelected: (value) {
                       switch (value) {
                         case 1: // Dashboard
@@ -149,63 +155,59 @@ class PanduanPenggunaPage extends StatelessWidget {
                           );
                           break;
 
-                        // case 2: // Profil
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => ProfilPage()),
-                        //   );
-                        //   break;
+                        case 2: // Profil
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ProfilePage()),
+                          );
+                          break;
 
-                        // case 3: // Jelajahi
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => JelajahiPage()),
-                        //   );
-                        //   break;
+                        case 3: // Jelajahi
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ExplorePage()),
+                          );
+                          break;
 
-                        // case 4: // Jurnal Pembiasaan
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
-                        //   );
-                        //   break;
+                        case 4: // Jurnal Pembiasaan
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
+                          );
+                          break;
 
-                        // case 5: // Permintaan Saksi
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => PermintaanSaksiPage()),
-                        //   );
-                        //   break;
+                        case 5: // Permintaan Saksi
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => PermintaanSaksi()),
+                          );
+                          break;
 
-                        // case 6: // Progress
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => ProgressPage()),
-                        //   );
-                        //   break;
+                        case 6: // Progress
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ProgressBelajar()),
+                          );
+                          break;
 
-                        // case 7: // Catatan Sikap
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => CatatanSikapPage()),
-                        //   );
-                        //   break;
+                        case 7: // Catatan Sikap
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => CatatanSikapPage()),
+                          );
+                          break;
 
                         case 8: // Panduan Pengguna
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (_) => PanduanPenggunaPage(),
-                            ),
+                            MaterialPageRoute(builder: (_) => PanduanPenggunaPage()),
                           );
                           break;
 
                         case 9: // Pengaturan Akun
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (_) => PengaturanAkunPage(),
-                            ),
+                            MaterialPageRoute(builder: (_) => PengaturanAkunPage()),
                           );
                           break;
 
@@ -225,9 +227,7 @@ class PanduanPenggunaPage extends StatelessWidget {
                                     Navigator.pop(context); // tutup dialog
                                     Navigator.pushReplacement(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (_) => LoginPage(),
-                                      ),
+                                      MaterialPageRoute(builder: (_) => LoginPage()),
                                     );
                                   },
                                   child: const Text("Log Out"),

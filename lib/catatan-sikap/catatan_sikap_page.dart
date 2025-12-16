@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_clone/catatan-sikap/detail_catatan_sikap.dart';
+import 'package:jurnalku_clone/dashboard_page.dart';
 import 'package:jurnalku_clone/explore_page.dart';
+import 'package:jurnalku_clone/jurnal-pembiasaan/jurnal_pembiasaan_page.dart';
+import 'package:jurnalku_clone/login_page.dart';
+import 'package:jurnalku_clone/panduan-pengguna/panduan_pengguna.dart';
+import 'package:jurnalku_clone/pengaturan_akun_page.dart';
+import 'package:jurnalku_clone/permintaan_saksi.dart';
+import 'package:jurnalku_clone/profile/profile_page.dart';
+import 'package:jurnalku_clone/progress/progress_belajar.dart';
 
-class CatatanSikapPage extends StatelessWidget {
-  CatatanSikapPage({super.key});
+class CatatanSikapPage extends StatefulWidget {
+  const CatatanSikapPage({super.key});
 
+  @override
+  State<CatatanSikapPage> createState() => _CatatanSikapPageState();
+}
+
+class _CatatanSikapPageState extends State<CatatanSikapPage> {
   final List<Map<String, dynamic>> catatanData = [
     {
       "title": "Total Catatan",
@@ -29,68 +42,157 @@ class CatatanSikapPage extends StatelessWidget {
     },
   ];
 
+  // ================= MENU ITEM ====================
+  PopupMenuItem<int> _menuItem(IconData icon, String label, int value) {
+    return PopupMenuItem<int>(
+      value: value,
+      child: Row(
+        children: [
+          Icon(icon, size: 20, color: Colors.blueGrey),
+          const SizedBox(width: 14),
+          Text(label, style: const TextStyle(fontSize: 15, color: Colors.blueGrey)),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+
+      // ================= APP BAR ====================
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              bottom: BorderSide(color: Color(0xFFE2E8F0), width: 2),
-            ),
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          color: Colors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ExplorePage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  minimumSize: const Size(40, 40),
-                ),
-                child: const Icon(
-                  Icons.home,
-                  size: 25,
-                  color: Color(0xFF64748B),
-                ),
-              ),
+              const Icon(Icons.home, color: Colors.black),
+
               Row(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text(
-                        "Farhan Syarif Hidayatulloh",
+                        "M. Arizqy Khylmi Alkazhia",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.grey[800],
+                          color: Colors.black,
                         ),
                       ),
-                      const Text(
+                      Text(
                         "PPLG XII-3",
-                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
                     ],
                   ),
                   const SizedBox(width: 10),
-                  const CircleAvatar(
-                    radius: 18,
-                    backgroundImage: AssetImage(
-                      "assets/images/profile-blank.jpg",
+
+                  PopupMenuButton<int>(
+                    offset: const Offset(0, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
+                    elevation: 6,
+                    color: Colors.white,
+
+                    onSelected: (value) {
+                      switch (value) {
+                        case 1:
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => DashboardPage()));
+                          break;
+                        case 2:
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => ProfilePage()));
+                          break;
+                        case 3:
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => ExplorePage()));
+                          break;
+                        case 4: // Jurnal Pembiasaan
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => JurnalPembiasaanPage()),
+                          );
+                          break;
+                        case 5:
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => PermintaanSaksi()));
+                          break;
+                        case 6:
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => ProgressBelajar()));
+                          break;
+                        case 7:
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => CatatanSikapPage()));
+                          break;
+                        case 8:
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => PanduanPenggunaPage()));
+                          break;
+                        case 9:
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => PengaturanAkunPage()));
+                          break;
+                        case 10:
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text("Log Out"),
+                              content: const Text("Yakin mau keluar, mbut?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("Batal"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => LoginPage()),
+                                    );
+                                  },
+                                  child: const Text("Log Out"),
+                                ),
+                              ],
+                            ),
+                          );
+                          break;
+                      }
+                    },
+
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/profile-blank.jpg',
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+
+                    itemBuilder: (context) => [
+                      _menuItem(Icons.dashboard, "Dashboard", 1),
+                      _menuItem(Icons.person, "Profil", 2),
+                      _menuItem(Icons.explore, "Jelajahi", 3),
+                      const PopupMenuDivider(),
+                      _menuItem(Icons.people, "Permintaan Saksi", 5),
+                      _menuItem(Icons.bar_chart, "Progress", 6),
+                      _menuItem(Icons.report, "Catatan Sikap", 7),
+                      const PopupMenuDivider(),
+                      _menuItem(Icons.help_outline, "Panduan Pengguna", 8),
+                      _menuItem(Icons.settings, "Pengaturan Akun", 9),
+                      _menuItem(Icons.logout, "Log Out", 10),
+                    ],
                   ),
                 ],
               ),
@@ -99,6 +201,7 @@ class CatatanSikapPage extends StatelessWidget {
         ),
       ),
 
+      // ================= BODY ====================
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: ListView(
@@ -123,11 +226,8 @@ class CatatanSikapPage extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailCatatanSikapPage(),
-                  ),
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DetailCatatanSikapPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -150,6 +250,7 @@ class CatatanSikapPage extends StatelessWidget {
     );
   }
 
+  // ================= WARNING BOX ====================
   Widget _warningBox() {
     return Container(
       decoration: BoxDecoration(
@@ -191,6 +292,7 @@ class CatatanSikapPage extends StatelessWidget {
     );
   }
 
+  // ================= SUMMARY CARDS ====================
   Widget _summaryCards() {
     return Column(
       children: List.generate(catatanData.length, (index) {
@@ -242,7 +344,11 @@ class CatatanSikapPage extends StatelessWidget {
                   color: item["bgColor"],
                   borderRadius: BorderRadius.circular(100),
                 ),
-                child: Icon(item["icon"], color: item["iconColor"], size: 28),
+                child: Icon(
+                  item["icon"],
+                  color: item["iconColor"],
+                  size: 28,
+                ),
               ),
             ],
           ),
