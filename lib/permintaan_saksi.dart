@@ -1,8 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_clone/explore_page.dart';
+import 'package:jurnalku_clone/models/witness_request_model.dart';
+import 'package:jurnalku_clone/services/witness_request_service.dart';
 
-class PermintaanSaksi extends StatelessWidget {
+class PermintaanSaksi extends StatefulWidget {
   const PermintaanSaksi({super.key});
+
+  @override
+  State<PermintaanSaksi> createState() => _PermintaanSaksiState();
+}
+
+class _PermintaanSaksiState extends State<PermintaanSaksi> {
+  List<WitnessRequest> requests = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchRequests();
+  }
+
+  Future<void> fetchRequests() async {
+    try {
+      final result = await WitnessRequestService.fetchRequests();
+      setState(() {
+        requests = result;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() => isLoading = false);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,20 +43,20 @@ class PermintaanSaksi extends StatelessWidget {
         elevation: 2,
         titleSpacing: 0,
         leading: IconButton(
-          icon: Icon(Icons.home, color: Colors.grey, size: 28),
+          icon: const Icon(Icons.home, color: Colors.grey, size: 28),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ExplorePage()),
+              MaterialPageRoute(builder: (_) => const ExplorePage()),
             );
           },
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 15, top: 10),
+            padding: const EdgeInsets.only(right: 15, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
+              children: const [
                 Text(
                   "Aqila Hanin Nailah",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
@@ -37,49 +68,45 @@ class PermintaanSaksi extends StatelessWidget {
               ],
             ),
           ),
-          //avatar
           Padding(
-            padding: EdgeInsets.only(right: 25),
+            padding: const EdgeInsets.only(right: 25),
             child: CircleAvatar(
               radius: 20,
-              backgroundColor: Colors.grey[400],
+              backgroundColor: Colors.grey,
               child: Icon(Icons.person, color: Colors.white, size: 35),
             ),
           ),
         ],
       ),
+
       body: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 10),
-                    Text(
-                      "Permintaan Saksi",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      "Kelola permintaan menjadi saksi dari siswa lain",
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: 10),
+                const Text(
+                  "Permintaan Saksi",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 3),
+                Text(
+                  "Kelola permintaan menjadi saksi dari siswa lain",
+                  style: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.blue[100],
@@ -93,7 +120,9 @@ class PermintaanSaksi extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 25),
+
+                const SizedBox(height: 25),
+
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -112,53 +141,59 @@ class PermintaanSaksi extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Saksi",
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                ],
+                              child: Text(
+                                "Saksi",
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                            //garis
                             Divider(height: 1, color: Colors.grey[300]),
 
-                            Card(
-                              color: Colors.white,
-                              margin: EdgeInsets.all(12),
-                              elevation: 2,
-                              child: Theme(
-                                data: ThemeData().copyWith(
-                                  dividerColor: Colors.transparent,
-                                ),
-                                child: ExpansionTile(
-                                  title: Text("Aqila Hanin Nailah"),
-                                  childrenPadding: EdgeInsets.all(16),
-                                  children: [
-                                    tampilPermintaanSaksi("Tanggal", ""),
-                                    tampilPermintaanSaksi(
-                                      "Konfirmasi Status",
-                                      "",
+                            /// ===== ISI DARI API =====
+                            isLoading
+                                ? const Padding(
+                                    padding: EdgeInsets.all(30),
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
                                     ),
-                                    tampilPermintaanSaksi("Deskripsi", ""),
-                                    SizedBox(height: 10),
-                                  ],
-                                ),
-                              ),
-                            ),
+                                  )
+                                : Column(
+                                    children: requests.map((r) {
+                                      return Card(
+                                        color: Colors.white,
+                                        margin: const EdgeInsets.all(12),
+                                        elevation: 2,
+                                        child: ExpansionTile(
+                                          title: Text(r.user.name),
+                                          subtitle: Text("NIS: ${r.user.nis}"),
+                                          childrenPadding: const EdgeInsets.all(
+                                            16,
+                                          ),
+                                          children: [
+                                            tampilPermintaanSaksi(
+                                              "Tanggal",
+                                              r.requestDate,
+                                            ),
+                                            tampilPermintaanSaksi(
+                                              "Status",
+                                              r.status,
+                                            ),
+                                            tampilPermintaanSaksi(
+                                              "Deskripsi",
+                                              r.description,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
                           ],
                         ),
                       ),
-
-                      
                     ],
                   ),
                 ),
@@ -171,12 +206,16 @@ class PermintaanSaksi extends StatelessWidget {
   }
 }
 
-Widget tampilPermintaanSaksi(String projectWork, String value) {
+/// ===== WIDGET BARIS DETAIL =====
+Widget tampilPermintaanSaksi(String label, String value) {
   return Padding(
-    padding: EdgeInsets.all(10),
+    padding: const EdgeInsets.symmetric(vertical: 6),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [Text(projectWork), Text(value)],
+      children: [
+        Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
+        Expanded(child: Text(value, textAlign: TextAlign.end)),
+      ],
     ),
   );
 }

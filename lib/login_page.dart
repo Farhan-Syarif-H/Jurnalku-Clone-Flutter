@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jurnalku_clone/dashboard_page.dart';
+import 'services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -65,6 +66,10 @@ class InfoTile extends StatelessWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController nisController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool _isLoading = false;
+
   bool _isPasswordHidden = true;
 
   final List<InfoItem> infoItems = [
@@ -172,24 +177,15 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 15),
 
                   TextField(
+                    controller: nisController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: "Masukkan username atau NIS",
                       filled: true,
                       fillColor: Colors.grey[100],
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 12,
-                      ),
                       border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Color(0xFF02398C),
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
@@ -207,37 +203,15 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 15),
 
                   TextField(
+                    controller: passwordController,
                     obscureText: _isPasswordHidden,
                     decoration: InputDecoration(
                       hintText: "Masukkan password",
                       filled: true,
                       fillColor: Colors.grey[100],
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 12,
-                      ),
                       border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Color(0xFF02398C),
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isPasswordHidden
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordHidden = !_isPasswordHidden;
-                          });
-                        },
                       ),
                     ),
                   ),
@@ -254,14 +228,45 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DashboardPage(),
-                          ),
-                        );
+                      onPressed: () async {
+                        setState(() => _isLoading = true);
+
+                        try {
+                          final result = await AuthService.login(
+                            nis: nisController.text,
+                            password: passwordController.text,
+                          );
+
+                          if (result.success) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DashboardPage(),
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          String errorMessage = e.toString();
+
+                          // hapus "Exception: "
+                          if (errorMessage.contains('Exception:')) {
+                            errorMessage = errorMessage.replaceFirst(
+                              'Exception: ',
+                              '',
+                            );
+                          }
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(errorMessage),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        } finally {
+                          setState(() => _isLoading = false);
+                        }
                       },
+
                       child: const Text(
                         "Masuk",
                         style: TextStyle(

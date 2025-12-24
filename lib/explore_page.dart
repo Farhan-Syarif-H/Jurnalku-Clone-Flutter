@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:jurnalku_clone/login_page.dart';
+import 'package:jurnalku_clone/models/student_model.dart';
+import 'package:jurnalku_clone/services/student_service.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
@@ -10,35 +12,11 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  // ---------------------------
-  // DATA DUMMY
-  // ---------------------------
-  final List<Map<String, dynamic>> dummyStudents = const [
-    {
-      "name": "Aqila Hanin Nailah",
-      "nis": "12309537",
-      "rombel": "PPLG XII-3",
-      "rayon": "Suk 2",
-      "portfolio": 1,
-      "sertifikat": 5,
-    },
-    {
-      "name": "M Arizqy Khylmi Alkazhia",
-      "nis": "12309716",
-      "rombel": "PPLG XII-3",
-      "rayon": "Wik 4",
-      "portfolio": 2,
-      "sertifikat": 8,
-    },
-    {
-      "name": "Farhan Syarif Hidayatulloh",
-      "nis": "12309639",
-      "rombel": "PPLG XII-3",
-      "rayon": "Cia 1",
-      "portfolio": 4,
-      "sertifikat": 12,
-    },
-  ];
+  TextEditingController searchController = TextEditingController();
+
+  List<Student> allStudents = [];
+  List<Student> students = [];
+  bool isLoading = true;
 
   // DATA
   final List<String> rombelList = [
@@ -55,6 +33,51 @@ class _ExplorePageState extends State<ExplorePage> {
   String? selectedRombel;
   String? selectedRayon;
   String? selectedJurusan;
+
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    try {
+      final result = await StudentService.fetchStudents();
+      setState(() {
+        allStudents = result;
+        students = result;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() => isLoading = false);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
+  void searchStudent(String keyword) {
+    final query = keyword.toLowerCase();
+
+    setState(() {
+      if (query.isEmpty) {
+        students = allStudents;
+      } else {
+        students = allStudents.where((student) {
+          return student.name.toLowerCase().contains(query) ||
+              student.nis.toString().contains(query) ||
+              student.rombel.toLowerCase().contains(query);
+        }).toList();
+      }
+    });
+  }
+
+  String getDisplayText() {
+    final total = allStudents.length;
+    final count = students.length;
+    if (total == 0) return 'Menampilkan 0 siswa';
+    if (count == 0) return 'Menampilkan 0 dari $total siswa';
+    return 'Menampilkan 1 - $count dari $total siswa';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,23 +129,18 @@ class _ExplorePageState extends State<ExplorePage> {
         ),
       ),
 
-      // ====================================
-      //  BODY
-      // ====================================
       body: ListView(
         children: [
           // Banner
           SizedBox(
-            height: showFilter
-                ? 700
-                : 300, // Tinggi dinamis berdasarkan showFilter
+            height: showFilter ? 700 : 300,
             width: double.infinity,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 // Background image
                 Container(
-                  height: showFilter ? 700 : 300, // Tinggi dinamis
+                  height: showFilter ? 700 : 300,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/Banner-Web.jpg"),
@@ -196,7 +214,7 @@ class _ExplorePageState extends State<ExplorePage> {
                               border: Border.all(
                                 color: Colors.grey,
                                 width: 0.5,
-                              )
+                              ),
                             ),
                             child: Row(
                               children: [
@@ -209,6 +227,7 @@ class _ExplorePageState extends State<ExplorePage> {
                                           "Cari nama siswa, NIS, atau rombel...",
                                       border: InputBorder.none,
                                     ),
+                                    onChanged: searchStudent,
                                   ),
                                 ),
                                 ElevatedButton(
@@ -291,7 +310,9 @@ class _ExplorePageState extends State<ExplorePage> {
                                   // ROMBEL
                                   Text(
                                     "Rombel",
-                                    style: TextStyle(fontWeight: FontWeight.w600),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   SizedBox(height: 6),
                                   DropdownButtonFormField<String>(
@@ -318,7 +339,9 @@ class _ExplorePageState extends State<ExplorePage> {
                                   // RAYON
                                   Text(
                                     "Rayon",
-                                    style: TextStyle(fontWeight: FontWeight.w600),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   SizedBox(height: 6),
                                   DropdownButtonFormField<String>(
@@ -345,7 +368,9 @@ class _ExplorePageState extends State<ExplorePage> {
                                   // JURUSAN
                                   Text(
                                     "Jurusan",
-                                    style: TextStyle(fontWeight: FontWeight.w600),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   SizedBox(height: 6),
                                   DropdownButtonFormField<String>(
@@ -383,14 +408,15 @@ class _ExplorePageState extends State<ExplorePage> {
                                               vertical: 14,
                                             ),
                                             shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                10,
-                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                           ),
                                           child: Text(
                                             "Terapkan",
-                                            style: TextStyle(color: Colors.white),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -408,16 +434,19 @@ class _ExplorePageState extends State<ExplorePage> {
                                             padding: EdgeInsets.symmetric(
                                               vertical: 14,
                                             ),
-                                            side: BorderSide(color: Colors.grey),
+                                            side: BorderSide(
+                                              color: Colors.grey,
+                                            ),
                                             shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                10,
-                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                           ),
                                           child: Text(
                                             "Reset",
-                                            style: TextStyle(color: Colors.grey),
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -437,48 +466,46 @@ class _ExplorePageState extends State<ExplorePage> {
 
           const SizedBox(height: 20),
 
-          // ------------------------------
-          // TITLE
-          // ------------------------------
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              "Menampilkan 1 - 12 dari 538 siswa",
+              getDisplayText(),
               style: TextStyle(color: Colors.grey[700], fontSize: 14),
             ),
           ),
 
           const SizedBox(height: 16),
 
-          // ------------------------------
-          // LIST CARD
-          // ------------------------------
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Column(
-              children: dummyStudents.map((s) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: buildStudentCard(
-                    name: s["name"],
-                    nis: s["nis"],
-                    rombel: s["rombel"],
-                    rayon: s["rayon"],
-                    portfolio: s["portfolio"],
-                    sertifikat: s["sertifikat"],
+            child: isLoading
+                ? Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(40),
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Column(
+                    children: students.map((s) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: buildStudentCard(
+                          name: s.name,
+                          nis: s.nis.toString(),
+                          rombel: s.rombel,
+                          rayon: s.rayon,
+                          portfolio: 0,
+                          sertifikat: 0,
+                        ),
+                      );
+                    }).toList(),
                   ),
-                );
-              }).toList(),
-            ),
           ),
         ],
       ),
     );
   }
 
-  // ====================================================
-  // FUNCTION: STUDENT CARD
-  // ====================================================
   Widget buildStudentCard({
     required String name,
     required String nis,
